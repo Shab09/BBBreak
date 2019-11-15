@@ -29,11 +29,15 @@ public class ChangePosition : MonoBehaviour {
             //Check if number of hits is equal to total balls 
             if (currBallCount == ballcount.BallCount) {
 
-                ballcount.BallCount+=ballsToIncrease;
-                ballsToIncrease=0;
+                ballcount.BallCount+=ballsToIncrease; // Increase nuber of balls according to collected powerup
+                ballsToIncrease=0; // Reset balls to increase 
                 GameValues.values.inShoot = false; //Can shoot again
                 currBallCount = 0; //Reset counter
                 firstHit = true;//Reset first hit
+
+                foreach(GameObject system in GameObject.FindGameObjectsWithTag("BlockSystem")){
+                    system.GetComponent<GenerateBlocks>().moveDown();
+                }
 
             }
         }
