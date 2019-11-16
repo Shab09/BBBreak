@@ -16,6 +16,13 @@ public class GenerateBlocks : MonoBehaviour
     void Awake()
     {
         newPositon = transform.position;
+        float xValue= xInit;
+        while(xValue<=xEnd){
+            GameObject obj = Instantiate(objToGenerate[Random.Range(0,objToGenerate.Count-1)]);
+            obj.transform.parent=transform;
+            obj.transform.localPosition = new Vector3(xValue,0,0);
+            xValue+=xSpan;
+        }
     }
 
     // Update is called once per frame
