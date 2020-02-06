@@ -7,7 +7,6 @@ public class BlockSystemGenerator : MonoBehaviour
     public static BlockSystemGenerator blockSystemGenerator;// Globel Reference to the system
     public GameObject generator;//Object to generate
     public Vector3 generationPosition = new Vector3(0,21,0);
-    
     private void Start() {
         //Make sytem accessable
         blockSystemGenerator=this;

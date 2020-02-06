@@ -8,6 +8,7 @@ public class ChangePosition : MonoBehaviour {
     private Vector3 positionToMove;
     public ShootBall ballcount; //Reference to the total number of balls
     private float ballsToIncrease = 0; //Number of balls to increase when turn ends
+
     public float BallsToIncrease { set { ballsToIncrease = value; } get { return ballsToIncrease; } }
 
     private void Awake () {
@@ -46,11 +47,16 @@ public class ChangePosition : MonoBehaviour {
     IEnumerator endturn () {
         yield return new WaitForSeconds (0.25f);
         ballcount.BallCount += ballsToIncrease; // Increase nuber of balls according to collected powerup
+        ballcount.displayText();//Display text after ball increased
         ballsToIncrease = 0; // Reset balls to increase 
         GameValues.values.inShoot = false; //Can shoot again
         currBallCount = 0; //Reset counter
         firstHit = true; //Reset first hit
-
+        GameValues.values.Turns=GameValues.values.Turns+1;
+        GameValues.values.setScore(1);
+        if(GameObject.FindGameObjectWithTag("BossBlock")){
+            SoundHolder.soundHolder.backgroundAudio.pitch+=0.1f;
+        }
         //Move all current block system down
         foreach (GameObject system in GameObject.FindGameObjectsWithTag ("BlockSystem")) {
             system.GetComponent<GenerateBlocks> ().moveDown ();
